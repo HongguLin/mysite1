@@ -9,10 +9,10 @@ from django.views.decorators.csrf import csrf_exempt
 
 
 def index(request):
-    users = list(User.objects.all())[0].as_json()
-    resp = JsonResponse(users)
-    resp['Access-Control-Allow-Origin'] = '*'
-    return resp 
+    # users = list(User.objects.all())[0].as_json()
+    # resp = JsonResponse(users)
+    # resp['Access-Control-Allow-Origin'] = '*'
+    return render(request, 'index.html') 
 
 @csrf_exempt 
 def userRegister(request):
@@ -40,7 +40,7 @@ def userRegister(request):
         res.set_cookie('token', value='', expires=datetime.utcnow() + timedelta(days=30))
         return res
     else:
-        return render(request, 'userRegister.html')
+        pass
 
 def authenticate(username, password):
     user = User.objects.get(Username=username)
@@ -79,7 +79,7 @@ def login(request):
             }, status=401)
 
     else:
-        return render(request, 'login.html')
+        pass
 
 
     
